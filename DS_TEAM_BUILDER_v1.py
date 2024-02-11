@@ -228,17 +228,26 @@ def best_teams():
 
     for i, commander_1 in enumerate(commander_names):
 
-        for j, commander_2 in enumerate(commander_names[i:]):
+        for j, commander_2 in enumerate(commander_names[i + 1:]):
 
-            for k, commander_3 in enumerate(commander_names[j:]):
+            for k, commander_3 in enumerate(commander_names[j + 1:]):
 
-                commanders = [commander_1, commander_2, commander_3]
+                commanders = sorted([commander_1, commander_2, commander_3], key=lambda status: status)
                 status = sum(status_to_list(commander_2, commander_1)) + sum(status_to_list(commander_3, commander_2), sum(status_to_list(commander_1, commander_3)))
 
-                list_of_best_commanders.append((commanders, status))
+                list_of_best_commanders.append((commanders, int(status * 100)))
 
-    return sorted(list_of_best_commanders, key=lambda status: status[1], reverse = True)
+    list_of_best_commanders = sorted(list_of_best_commanders, key=lambda status: status[1], reverse = True)
+    deduplicated_list = []
 
-for team in best_teams()[:15]:
+    for element in list_of_best_commanders:
+
+        if element not in deduplicated_list:
+
+            deduplicated_list.append(element)
+
+    return deduplicated_list
+
+for team in best_teams()[:50]:
 
     print(team)
