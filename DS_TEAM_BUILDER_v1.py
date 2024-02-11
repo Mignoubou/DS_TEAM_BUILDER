@@ -199,7 +199,7 @@ add_matchup("Vorazun", "Zagara", "Even")
 """ZAGARA MATCHUPS"""
 add_matchup("Zagara", "Zagara", "Even")
 
-def status_to_list(commander_1, commander_2): #Comment commander_1 gere les matchups de commander_2
+def status_to_list(commander_1, commander_2):
 
     status_list = []
 
