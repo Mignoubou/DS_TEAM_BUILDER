@@ -199,6 +199,9 @@ add_matchup("Vorazun", "Zagara", "Even")
 """ZAGARA MATCHUPS"""
 add_matchup("Zagara", "Zagara", "Even")
 
+consistency = 10
+ratio = consistency ** (1 / 17)
+
 def status_to_list(commander_1, commander_2):
 
     status_list = []
@@ -215,7 +218,7 @@ def status_to_list(commander_1, commander_2):
 
     for i in range(len(status_list)):
 
-        status_list[i] *= 1.2 ** i + 1
+        status_list[i] *= ratio ** (i + 1)
 
     return status_list
 
@@ -223,11 +226,11 @@ def best_teams():
 
     list_of_best_commanders = []
 
-    for commander_1 in commander_names:
+    for i, commander_1 in enumerate(commander_names):
 
-        for commander_2 in commander_names:
+        for j, commander_2 in enumerate(commander_names[i:]):
 
-            for commander_3 in commander_names:
+            for k, commander_3 in enumerate(commander_names[j:]):
 
                 commanders = [commander_1, commander_2, commander_3]
                 status = sum(status_to_list(commander_2, commander_1)) + sum(status_to_list(commander_3, commander_2), sum(status_to_list(commander_1, commander_3)))
